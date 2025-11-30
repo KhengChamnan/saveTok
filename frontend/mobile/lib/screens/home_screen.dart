@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -28,11 +29,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _requestPermissions() async {
-    if (await Permission.storage.isDenied) {
-      await Permission.storage.request();
-    }
-    if (await Permission.manageExternalStorage.isDenied) {
-      await Permission.manageExternalStorage.request();
+    if (Platform.isIOS) {
+      // iOS: Request photos permission to save to Photos library
+      if (await Permission.photos.isDenied) {
+        await Permission.photos.request();
+      }
+    } else {
+      // Android: Request storage permissions
+      if (await Permission.storage.isDenied) {
+        await Permission.storage.request();
+      }
+      if (await Permission.manageExternalStorage.isDenied) {
+        await Permission.manageExternalStorage.request();
+      }
     }
   }
 
@@ -86,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
       });
 
       // Download the file
-      final savePath = await _apiService.downloadToDownloads(
+      final downloadResult = await _apiService.downloadToDownloads(
         result['download_url'],
         result['filename'],
         onProgress: (received, total) {
@@ -98,13 +107,18 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       );
 
+      final savedToPhotos = downloadResult['savedToPhotos'] as bool;
+      final savePath = downloadResult['path'] as String;
+
       setState(() {
-        _successMessage = 'Video saved to: $savePath';
+        _successMessage = savedToPhotos
+            ? 'Video saved to Photos! 📸'
+            : 'Video saved to: $savePath';
         _isDownloading = false;
       });
 
       Fluttertoast.showToast(
-        msg: 'Download complete!',
+        msg: savedToPhotos ? 'Saved to Photos!' : 'Download complete!',
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.green,
