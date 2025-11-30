@@ -2,6 +2,9 @@ import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
+// API base URL - uses environment variable in production, empty string for local dev (uses proxy)
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 function App() {
   const [url, setUrl] = useState('')
   const [loading, setLoading] = useState(false)
@@ -25,7 +28,7 @@ function App() {
 
     try {
       // Request download
-      const response = await axios.post('/api/download', { url })
+      const response = await axios.post(`${API_URL}/api/download`, { url })
       
       setVideoInfo({
         title: response.data.title,
@@ -33,7 +36,7 @@ function App() {
       })
 
       // Trigger file download
-      const downloadUrl = response.data.download_url
+      const downloadUrl = `${API_URL}${response.data.download_url}`
       const link = document.createElement('a')
       link.href = downloadUrl
       link.download = response.data.filename
