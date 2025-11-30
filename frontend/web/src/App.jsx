@@ -62,8 +62,8 @@ function App() {
     <div className="container">
       <div className="card">
         <div className="logo">
-          <span className="logo-icon">📱</span>
-          <h1>TikTok Downloader</h1>
+          <span className="logo-icon">🎬</span>
+          <h1>SaveTok</h1>
         </div>
         
         <p className="subtitle">

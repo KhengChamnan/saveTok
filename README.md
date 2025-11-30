@@ -1,6 +1,6 @@
-# TikTok Video Downloader
+# SaveTok
 
-A full-stack application to download TikTok videos with a FastAPI backend, React web frontend, and Flutter mobile app.
+A full-stack application to download TikTok videos without watermark. Built with FastAPI backend, React web frontend, and Flutter mobile app.
 
 ## Project Structure
 

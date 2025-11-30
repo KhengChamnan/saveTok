@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 
 void main() {
-  runApp(const TikTokDownloaderApp());
+  runApp(const SaveTokApp());
 }
 
-class TikTokDownloaderApp extends StatelessWidget {
-  const TikTokDownloaderApp({super.key});
+class SaveTokApp extends StatelessWidget {
+  const SaveTokApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TikTok Downloader',
+      title: 'SaveTok',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

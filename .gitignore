@@ -38,7 +38,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/ - Removed because it conflicts with Flutter's lib/ folder
 lib64/
 parts/
 sdist/

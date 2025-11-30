@@ -164,19 +164,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       // Logo
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('📱', style: TextStyle(fontSize: 40)),
-                          const SizedBox(width: 12),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              'images/savetok_logo.png',
+                              width: 80,
+                              height: 80,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
                           ShaderMask(
                             shaderCallback: (bounds) => const LinearGradient(
                               colors: [Color(0xFFFE2C55), Color(0xFF25F4EE)],
                             ).createShader(bounds),
                             child: const Text(
-                              'TikTok Downloader',
+                              'SaveTok',
                               style: TextStyle(
-                                fontSize: 22,
+                                fontSize: 28,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
